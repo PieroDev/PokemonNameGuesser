@@ -11,17 +11,46 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>PokeGuessr</h1>
-    <a href="#" class="btn btn-primary start">Comenzar</a>
-    <div class="container hidden">
-        <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top pokeImg" alt="...">
-            <div class="card-body">
-              <h5 class="card-title pokeName"></h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="body-container">
+        <div class="header">
+            <h1  style="text-align: center;"><img class="tittle" src="img/pokeguessr.png" alt=""></h1>
+            <p style="font-size: 25px; font-family: 'Times New Roman', Times, serif; ">Pokemon Name Guesser</p>
+            <a href="#" class="btn btn-danger start">Start</a>
+        </div>
+        <div class="container hidden">
+            <div class="container-fluid cardContainer">
+                <h3 class="nivel" style="text-align: center; "></h3>
+                <h1 class="respuestaCorrecta hidden"></h1>
+                <div class="card text-center">
+                    <img src="" class="card-img-top pokeImg" alt="...">
+                    <div class="card-body">
+                      <h2 class="card-title pokeName hidden" style="color: rgb(0, 180, 0);"></h2>
+                      <h5 class="card-tittle pokePista"></h5>
+                      <p class="card-text"></p>
+                      <input class="respuesta" type="text" autofocus  placeholder="Escribe el nombre acá">
+                      <a class="btn btn-danger pista">Clue</a>
+                      <a class="pokeBallIcon btn"><img src="img/pokeball.png" alt=""></a>
+                      <p class="noPista hidden" style="color: red;">There's no more clues</p>
+                    </div>
+                </div>
             </div>
-          </div>
+        </div>
+        <div class="prueba container-fluid ">
+            <h3 class="tusRespuestas hidden">This are your correct answers</h3>
+            <div class="row justify-content-center pokesContainer">
+            </div>
+        </div>
+        
     </div>
+    <footer id="footer">
+        <div class="text-center p-3">
+            © 2021 Copyright:
+            <a class="text-dark" href="Piero-Dev">Piero-Dev</a>
+            <br>
+            Special thanks to:
+            <a href="https://pokeapi.co/">PokeApi</a>
+        </div>
+    </footer>  
+    
 </body>
 </html>

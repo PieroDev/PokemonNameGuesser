@@ -1,3 +1,86 @@
+html body{
+    background-color: rgb(218, 8, 8);   
+}
+
+.header{
+    text-align: center;
+    margin: 0 10px 10px 10px;
+    padding-top: 25px;
+}
+
+
 .hidden{
     visibility: hidden;
+}
+
+.pokeBallIcon img{
+    width: 30px;
+}
+
+.pokeImg{
+    margin-top: 15px;
+    width: 200px;
+}
+
+.nivel{
+    margin-bottom: 10px;
+}
+
+.card{
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    padding: 15px;
+    width: 18rem;
+}
+
+.correcto{
+    border: 5px solid rgb(0, 180, 0);
+}
+
+.equivocado{
+    border: 5px solid rgb(218, 8, 8);
+}
+
+.respuestaCorrecta{
+    text-align: center;
+    color:  rgb(218, 8, 8);
+}
+
+.pokeName, .pokePista, .tusRespuestas{
+    text-align: center;
+}
+
+.pokesContainer{
+    width: 100%;
+}
+
+.body-container{
+    width: 50%;
+    height: 100vh;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+}
+
+#footer{
+    bottom: 0;
+    width: 50%;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid gray;
+}
+
+@media screen and (max-width:1040px){
+    .body-container{
+        width: 100%;
+        height: 100%;
+    }
+    
+    #footer{
+        width: 100%;
+    }
+
+    .tittle{
+        width: 65%;
+    }
 }

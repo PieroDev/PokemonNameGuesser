@@ -84,3 +84,11 @@ html body{
         width: 65%;
     }
 }
+
+.opaco{
+    filter: grayscale(100%);
+}
+
+.pokePista2{
+    letter-spacing: 5px;
+}

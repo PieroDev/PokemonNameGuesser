@@ -1,15 +1,20 @@
 var pistaCounter = 0;
 var nivel = 1;
 var pokes = [];
+var pistaCounter2 = 0;
+var pistas = [];
 
 $(document).ready(function () {
     pistaCounter = 0;
+    pistaCounter2 = 0;
+    pistas = [];
     $(".start").on("click", function () {
         mostrarPoke();
     });
 
     $(".pista").on("click", function () {
-        mostrarPista();
+        /* mostrarPista(); */
+        mostrarPista2();
     });
 
     $(".pokeBallIcon").on("click", function () {
@@ -21,14 +26,14 @@ $(document).ready(function () {
             verificarRespuesta();
         }
     });
-
 })
-
 
 
 function mostrarPoke() {
     $('input').val('');
     pistaCounter = 0;
+    pistaCounter2 = 0;
+    pistas = [];
     $(".noPista").addClass("hidden");
     var id = Math.floor((Math.random() * 151) + 1);
     imgUrl = "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png"
@@ -55,24 +60,19 @@ function mostrarPoke() {
             $(".container").removeClass("hidden");
             $(".respuesta").focus();
         }, 500))
-
 }
-
-/* function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  } */
 
 function espaciosNombre(nombre) {
-    console.log(nombre.length);
     var largoNombre = nombre.length;
-    var pista = "_  ".repeat(largoNombre);
-    $(".pokePista").html(pista);
+    /* var pista = "_  ".repeat(largoNombre); */
+    var pista2 = "_ ".repeat(largoNombre);
+    /* $(".pokePista").html(pista); */
+    $(".pokePista2").html(pista2);
 }
 
-function mostrarPista() {
+/* function mostrarPista() {
     pistaCounter++;
     var nombre = $(".pokeName").html();
-    console.log(nombre + " y su largo es: " + nombre.length);
     // aca  tengo que calcular con pistaCounter cuantas 
     // pistas tengo que dar.
     var pistasRestantes = nombre.length - pistaCounter
@@ -83,7 +83,48 @@ function mostrarPista() {
         console.log(nombre.substring(0, pistaCounter));
         $(".pokePista").html(nombre.substring(0, pistaCounter).toUpperCase() + "  " + "_  ".repeat(pistasRestantes));
     }
+} */
+
+
+function mostrarPista2(){
+    pistaCounter2++;
+    if(pistaCounter2<4){
+        var nombre = $(".pokeName").html();
+        var letraRandom = Math.floor((Math.random() * nombre.length) + 1)
+        var pista = nombre.charAt(letraRandom-1);
+        var nombreSeparado = nombre.split("");
+        var espacios= $(".pokePista2").html();
+        var espacioCreado = espacios.split(" ");
+        if(pistaCounter2===1){
+            espacioCreado.pop();
+        }
+        console.log("La pista es: "+pista);
+        if(pistas.includes(pista)){
+            console.log("Si esta en el array");
+            pistaCounter2--;
+            mostrarPista2();
+            espacioCreado.push();
+        }
+        else{
+            console.log("Se añadio "+pista+" al array.");
+            pistas.push(pista);
+            console.log(pistas);
+            var indexPista = nombreSeparado.indexOf(pista);
+            espacioCreado[indexPista] = pista;
+            console.log(nombreSeparado);
+            console.log(indexPista);
+            console.log(espacioCreado);
+            pistaCreada = espacioCreado.join(" ");
+            $(".pokePista2").html(pistaCreada.toUpperCase());
+        }
+        
+    }
+    else{
+        $(".noPista").removeClass("hidden");
+    }
 }
+
+
 
 function verificarRespuesta() {
     var nombre = $(".pokeName").html();
@@ -95,9 +136,11 @@ function verificarRespuesta() {
         $(".cardContainer").addClass("correcto");
         $(".pokeName").append("<span>   ✓</span>");
         $(".pokeName").removeClass("hidden");
+        $(".pokeImg").removeClass("opaco");
         setTimeout(function () {
             $(".cardContainer").removeClass("correcto");
             $(".pokeName").addClass("hidden");
+            $(".pokeImg").addClass("opaco");
             mostrarPoke();
         }, 1400)
         actualizarLista();
@@ -124,10 +167,3 @@ function actualizarLista() {
         $(".pokesContainer").append("<div class=" + "col" + "><img src=" + sprite + "></div>");
     });
 }
-/* $(".prueba").append("<h1>Holas</")
-
-numeros.forEach(numero => {
-    $(".prueba").append("<p>"+numero+"</p>")
-}); */
-{
-    /* <span>✓</span> */ }

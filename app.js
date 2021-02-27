@@ -26,7 +26,6 @@ $(document).ready(function () {
 
 
 
-
 function mostrarPoke() {
     $('input').val('');
     pistaCounter = 0;
@@ -106,7 +105,7 @@ function verificarRespuesta() {
         nivel = 1;
         pokes = [];
         $(".cardContainer").addClass("equivocado");
-        $(".respuestaCorrecta").html("La respuesta correcta era: " + nombre);
+        $(".respuestaCorrecta").html("The correct answer was: " + nombre);
         $(".respuestaCorrecta").removeClass("hidden");
         $(".tusRespuestas").addClass("hidden");
         actualizarLista();

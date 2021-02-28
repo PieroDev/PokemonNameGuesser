@@ -1,6 +1,9 @@
 html body{
     background-color: rgb(218, 8, 8);   
 }
+br{
+    color: rgb(255, 255, 255);
+}
 
 .header{
     text-align: center;
@@ -57,17 +60,20 @@ html body{
 
 .body-container{
     width: 50%;
-    height: 100vh;
-    margin: auto;
+    height: 100%;
+    margin: auto auto 0 auto;
+    background-color: rgb(255, 255, 255);
+}
+
+.prueba{
     background-color: rgb(255, 255, 255);
 }
 
 #footer{
-    bottom: 0;
     width: 50%;
     margin: auto;
     background-color: rgb(255, 255, 255);
-    padding-top: 25px;
+    bottom: 0;
 }
 
 @media screen and (max-width:1040px){
@@ -78,6 +84,7 @@ html body{
     
     #footer{
         width: 100%;
+
     }
 
     .tittle{

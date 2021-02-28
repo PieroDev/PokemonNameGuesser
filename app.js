@@ -1,8 +1,10 @@
 var pistaCounter = 0;
 var nivel = 1;
 var pokes = [];
+var nombrePokes = [];
 var pistaCounter2 = 0;
 var pistas = [];
+var generation = 1;
 
 $(document).ready(function () {
     pistaCounter = 0;
@@ -26,6 +28,7 @@ $(document).ready(function () {
             verificarRespuesta();
         }
     });
+    
 })
 
 
@@ -35,8 +38,74 @@ function mostrarPoke() {
     pistaCounter2 = 0;
     pistas = [];
     $(".noPista").addClass("hidden");
-    var id = Math.floor((Math.random() * 151) + 1);
-    imgUrl = "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png"
+    console.log("Nivel : "+nivel);
+    switch (true){
+        case (nivel<=5): 
+            generation=1;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=6 && nivel<11):
+            generation=2;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=11 && nivel<16):
+            generation=3;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=16 && nivel<21):
+            generation=4;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=21 && nivel<26): 
+            generation=5;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=26 && nivel<31):
+            console.log("generacion 6");
+            generation=6;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=31 && nivel<36):
+            generation=7;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>=36 && nivel<41):
+            generation=8;
+            $(".generationLevel").html("Generation "+generation);
+            break;
+        case (nivel>40):
+            victory();
+    }
+
+    switch (generation) {
+        case 1:
+            var id = Math.floor((Math.random() * 151) + 1);
+            break;
+        case 2: 
+            var id = Math.floor((Math.random() * 100) + 151);
+            break;
+        case 3: 
+            var id = Math.floor((Math.random() * 135) + 251);
+            break;
+        case 4: 
+            var id = Math.floor((Math.random() * 107) + 386);
+            break;
+        case 5: 
+            var id = Math.floor((Math.random() * 156) + 493);
+            break;
+        case 6: 
+            var id = Math.floor((Math.random() * 72) + 649);
+            break;
+        case 7: 
+            var id = Math.floor((Math.random() * 88) + 721);
+            break;
+        case 8: 
+            var id = Math.floor((Math.random() * 89) + 898);
+            break;
+    }
+    
+    imgUrl = "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png";
+    testImage(imgUrl);
     console.log(imgUrl);
     $(".pokeImg").attr("src", "" + imgUrl);
     $(".nivel").html("Pokemon " + nivel);
@@ -46,15 +115,25 @@ function mostrarPoke() {
             dataType: "json"
         })
         .then(function (pokemon) {
+            testImage(imgUrl);
             $(".start").addClass("hidden");
-            setTimeout(function () {
-                var pokemonName = pokemon.name;
-                var pokeSprite = pokemon.sprites.front_default;
-                pokes.push(pokeSprite);
-                console.log(pokemonName);
-                $(".pokeName").html(pokemonName);
-                espaciosNombre(pokemonName);
-            }, 500)
+            if(nombrePokes.includes(pokemon.name)){
+                console.log("Este pokemon ya salió");
+                mostrarPoke();
+            }
+            else{
+                setTimeout(function () {
+                    var pokemonName = pokemon.name;
+                    var pokeSprite = pokemon.sprites.front_default;
+                    pokes.push(pokeSprite);
+                    nombrePokes.push(pokemonName);
+                    console.log(pokemonName);
+                    $(".pokeName").html(pokemonName);
+                    $(".height").html("Height: "+((pokemon.height)/10)+"m");
+                    $(".weight").html("Weight: "+((pokemon.weight)/10)+"kg");
+                    espaciosNombre(pokemonName);
+                }, 500)
+            }
         })
         .then(setTimeout(function () {
             $(".container").removeClass("hidden");
@@ -148,7 +227,7 @@ function verificarRespuesta() {
         nivel = 1;
         pokes = [];
         $(".cardContainer").addClass("equivocado");
-        $(".respuestaCorrecta").html("The correct answer was: " + nombre);
+        $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
         $(".respuestaCorrecta").removeClass("hidden");
         $(".tusRespuestas").addClass("hidden");
         actualizarLista();
@@ -167,3 +246,21 @@ function actualizarLista() {
         $(".pokesContainer").append("<div class=" + "col" + "><img src=" + sprite + "></div>");
     });
 }
+
+
+function testImage(imgUrl) {
+    var tester = new Image();
+    tester.addEventListener('load', imageFound);
+    tester.addEventListener('error', imageNotFound);
+    tester.src = imgUrl;
+}
+
+function imageFound() {
+    console.log('That image is found and loaded');
+}
+
+function imageNotFound() {
+    console.log('That image was not found.');
+    mostrarPoke();
+}
+

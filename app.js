@@ -118,10 +118,14 @@ function mostrarPoke() {
             var id = Math.floor((Math.random() * 89) + 898);
             break;
     }
+
     imgUrl = "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png";
     testImage(imgUrl);
-    $(".pokeImg").attr("src", "" + imgUrl);
-    $(".nivel").html("Pokemon " + nivel);
+    setTimeout(function(){
+        $(".pokeImg").attr("src", "" + imgUrl);
+        $(".nivel").html("Pokemon " + nivel);
+    },2000)
+    
 
     $.ajax({
             url: "https://pokeapi.co/api/v2/pokemon/" + id + "/",
@@ -155,7 +159,7 @@ function mostrarPoke() {
                         console.log(pokemonName);
                         $(".pokeName").html(pokemonName);
                         espaciosNombre(pokemonName);
-                }, 500)
+                }, 1700)
             }
         })
         .then(setTimeout(function () {
@@ -223,12 +227,14 @@ function verificarRespuesta() {
         $(".pokeName").append("<span>   ✓</span>");
         $(".pokeName").removeClass("hidden");
         $(".pokeImg").removeClass("opaco");
+        $(".pokeImg").addClass("brillante");
+        mostrarPoke();
         setTimeout(function () {
             $(".cardContainer").removeClass("correcto");
             $(".pokeName").addClass("hidden");
+            $(".pokeImg").removeClass("brillante");
             $(".pokeImg").addClass("opaco");
-            mostrarPoke();
-        }, 1400)
+        }, 2000)
         actualizarLista();
     } else {
         vidas--;
@@ -237,11 +243,15 @@ function verificarRespuesta() {
             $(".cardContainer").addClass("equivocado");
             $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
             $(".respuestaCorrecta").removeClass("hidden");
+            $(".pokeImg").removeClass("opaco");
+            $(".pokeImg").addClass("semi");
             borrarPoke=true;
             mostrarPoke();
             setTimeout(function () {
                 $(".cardContainer").removeClass("equivocado");
                 $(".respuestaCorrecta").addClass("hidden");
+                $(".pokeImg").removeClass("semi");
+                $(".pokeImg").addClass("opaco");
             }, 2000)
             
         }
@@ -251,13 +261,14 @@ function verificarRespuesta() {
             $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
             $(".respuestaCorrecta").removeClass("hidden");
             $(".tusRespuestas").addClass("hidden");
+            $(".pokeImg").addClass("semi");
             setTimeout(function () {
             $(".cardContainer").removeClass("equivocado");
             $(".respuestaCorrecta").addClass("hidden");
             $(".container").addClass("hidden");
+            $(".pokeImg").removeClass("semi");
             $(".start").removeClass("hidden");
             resetGame();
-            
         }, 2500)
         }
         
@@ -304,13 +315,16 @@ function mostrarReglas(){
     $(".rulesContainer").css("display", "block");
 }
 
-// Renders the pokemon types
+// Renders the pokemon types icons and adds a title to each icon
 function renderTipos(tipos){
+    var x = 0;
     console.log("Estos son los tipos que llegan a la funcion:"+tipos);
     $(".dataTypes").html("");
     tipos.forEach(tipo => {
-        $(".dataTypes").append("<div class=" + "col" + "><img src= img/types/" + tipo + ".png class="+"typeIcon"+"></div>")
-        $(".typeIcon").attr("title", ""+tipo+"");
+        x++;
+        $(".dataTypes").append("<div class=" + "col" + "><img src= img/types/" + tipo + ".png class="+"typeIcon"+x+"></div>")
+        $(".typeIcon"+x).attr("title", ""+tipo+"");
+        $(".typeIcon"+x).addClass("typeIcons");
     });
 }
 // This is triggered by 2 listeners, when "enter key" is pressed and pokeBallIcon is pressed

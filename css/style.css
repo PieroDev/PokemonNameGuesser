@@ -74,7 +74,7 @@ br{
     width: 150px;
 }
 
-.typeIcon{
+.typeIcons{
     width: 30px;
     margin: 5px 0;
 }
@@ -91,7 +91,17 @@ br{
 }
 
 .opaco{
-    filter: grayscale(100%);
+    filter: brightness(0%);
+}
+
+.brillante{
+    transition: 0.5s linear;
+    filter: brightness(100%);
+}
+
+.semi{
+    transition: 0.5s linear;
+    filter: brightness(50%);
 }
 
 .pokePista2{

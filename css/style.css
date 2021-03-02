@@ -59,7 +59,7 @@ br{
 }
 
 .body-container{
-    width: 50%;
+    width: 60%;
     height: 100%;
     margin: auto auto 0 auto;
     background-color: rgb(255, 255, 255);
@@ -67,6 +67,46 @@ br{
 
 .prueba{
     background-color: rgb(255, 255, 255);
+}
+
+.opaco{
+    filter: grayscale(100%);
+}
+
+.pokePista2{
+    letter-spacing: 5px;
+}
+
+.corazones{
+    width: 25px;
+    margin: 0 5px;
+}
+
+.rulesContainer{
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 25%;
+    width: 23%;
+    padding: 10px;
+    border-style: dashed;
+    margin-right: 10px;
+    background-color: rgba(255, 255, 255, 0.295);
+}
+
+.reglas{
+    text-align: justify;
+    list-style: none;
+
+}
+
+.close{
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid black;
+    visibility: hidden;
 }
 
 #footer{
@@ -90,12 +130,30 @@ br{
     .tittle{
         width: 65%;
     }
+
+    .rulesContainer{
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background-color: rgba(0, 0, 0, 0.774);
+        color: rgb(255, 255, 255) ;
+    }
+
+    .close{
+        visibility: visible;
+    }
+
+    .pokePista2{
+        letter-spacing: 2px;
+    }
 }
 
-.opaco{
-    filter: grayscale(100%);
+@media screen and (max-width:720px){
+    .rulesContainer{
+        width: 100%;
+    }
 }
 
-.pokePista2{
-    letter-spacing: 5px;
-}

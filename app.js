@@ -5,6 +5,7 @@ var nombrePokes = [];
 var pistaCounter2 = 0;
 var pistas = [];
 var generation = 1;
+var vidas = 3;
 
 $(document).ready(function () {
     pistaCounter = 0;
@@ -28,6 +29,15 @@ $(document).ready(function () {
             verificarRespuesta();
         }
     });
+
+    $(".close").on("click", function () {
+        cerrarReglas();
+    });
+
+    $(".mostrarReglas").on("click", function () {
+        mostrarReglas();
+    });
+
     
 })
 
@@ -37,6 +47,7 @@ function mostrarPoke() {
     pistaCounter = 0;
     pistaCounter2 = 0;
     pistas = [];
+    renderVidas(vidas);
     $(".noPista").addClass("hidden");
     console.log("Nivel : "+nivel);
     switch (true){
@@ -143,26 +154,11 @@ function mostrarPoke() {
 
 function espaciosNombre(nombre) {
     var largoNombre = nombre.length;
-    /* var pista = "_  ".repeat(largoNombre); */
     var pista2 = "_ ".repeat(largoNombre);
-    /* $(".pokePista").html(pista); */
     $(".pokePista2").html(pista2);
 }
 
-/* function mostrarPista() {
-    pistaCounter++;
-    var nombre = $(".pokeName").html();
-    // aca  tengo que calcular con pistaCounter cuantas 
-    // pistas tengo que dar.
-    var pistasRestantes = nombre.length - pistaCounter
-    if (pistasRestantes < 0) {
-        $(".noPista").removeClass("hidden");
-    } else {
-        console.log(pistasRestantes);
-        console.log(nombre.substring(0, pistaCounter));
-        $(".pokePista").html(nombre.substring(0, pistaCounter).toUpperCase() + "  " + "_  ".repeat(pistasRestantes));
-    }
-} */
+
 
 
 function mostrarPista2(){
@@ -193,6 +189,10 @@ function mostrarPista2(){
             console.log(nombreSeparado);
             console.log(indexPista);
             console.log(espacioCreado);
+            console.log(espacioCreado.length)
+            if(espacioCreado.length>=8 ){
+                $(".pokePista2").css("letter-spacing", "3px")
+            }
             pistaCreada = espacioCreado.join(" ");
             $(".pokePista2").html(pistaCreada.toUpperCase());
         }
@@ -224,19 +224,34 @@ function verificarRespuesta() {
         }, 1400)
         actualizarLista();
     } else {
-        nivel = 1;
-        pokes = [];
-        $(".cardContainer").addClass("equivocado");
-        $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
-        $(".respuestaCorrecta").removeClass("hidden");
-        $(".tusRespuestas").addClass("hidden");
-        actualizarLista();
-        setTimeout(function () {
+        vidas--;
+        if(vidas>0){
+            console.log("Vidas restantes: "+vidas)
+            renderVidas(vidas);
+            $(".cardContainer").addClass("equivocado");
+            $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
+            $(".respuestaCorrecta").removeClass("hidden");
+            setTimeout(function () {
+                $(".cardContainer").removeClass("equivocado");
+                $(".respuestaCorrecta").addClass("hidden");
+            }, 2500)
+            mostrarPoke();
+        }
+        else{
+            renderVidas(vidas);
+            $(".cardContainer").addClass("equivocado");
+            $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
+            $(".respuestaCorrecta").removeClass("hidden");
+            $(".tusRespuestas").addClass("hidden");
+            setTimeout(function () {
             $(".cardContainer").removeClass("equivocado");
             $(".respuestaCorrecta").addClass("hidden");
             $(".container").addClass("hidden");
             $(".start").removeClass("hidden");
+            resetGame();
         }, 2500)
+        }
+        
     }
 }
 
@@ -264,3 +279,32 @@ function imageNotFound() {
     mostrarPoke();
 }
 
+function renderVidas(vidas){
+    var corazon = "img/corazon.png";
+    $(".vidas").html("");
+     for(var i=0; i<vidas; i++){
+         $(".vidas").append("<img class="+"corazones"+" src="+corazon+">");
+    }
+    
+    
+}
+
+function cerrarReglas(){
+    console.log("se deberia cerrar");
+    $(".rulesContainer").css("display", "none");
+}
+
+function mostrarReglas(){
+    $(".rulesContainer").css("display", "block");
+}
+
+function resetGame(){
+  pistaCounter = 0;
+  nivel = 1;
+  pokes = [];
+  nombrePokes = [];
+  pistaCounter2 = 0;
+  pistas = [];
+  generation = 1;
+  vidas = 3;
+}

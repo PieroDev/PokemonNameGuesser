@@ -22,6 +22,10 @@
         </div>
         <div class="container hidden">
             <div class="container-fluid cardContainer">
+                <p class="card-text vidasRestantes" style="text-align: center; font-size: 1.2em;">Remaining lives</p>
+                <p class="card-text vidas" style="text-align: center;">
+                    
+                </p>
                 <h3 class="nivel" style="text-align: center; "></h3>
                 <h6 class="generationLevel"style="text-align: center;"></h6>
                 <h1 class="respuestaCorrecta hidden"></h1>
@@ -37,8 +41,11 @@
                         <a class="btn btn-danger pista">Clue</a>
                         <a class="pokeBallIcon btn"><img src="img/pokeball.png" alt=""></a>
                         <p class="noPista hidden" style="color: red;">There's no more clues</p>
+                        <a class="btn btn-info mostrarReglas" style="font-size: 10px;">Rules</a>
                     </div>
                 </div>
+                
+                
             </div>
         </div>
         <div class="prueba container-fluid ">
@@ -47,6 +54,16 @@
             </div>
         </div>
 
+    </div>
+    <div class="rulesContainer">
+        <a class="btn btn-dark close">X</a>
+        <h3>Game rules</h3>
+        <ul class="reglas">
+            <li><p>You have 3 lifes and 3 clues for each pokemon, you can ask a clue pressing the "clue" button</p></li>
+            <li><p>Each five pokemon that you guess, you'll advance to the next generation.</p></li>
+            <li><p class="pokeBallIcon">Press ⏎ (Enter) or the <span ><img src="img/pokeball.png"></span> to make your guess</p></li>
+        </ul>
+        <img class="psyRules"src="img/psyduck.png" style="width: 150px;">
     </div>
 
     <footer id="footer">

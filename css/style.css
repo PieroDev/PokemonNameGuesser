@@ -1,6 +1,7 @@
 html body{
     background-color: rgb(218, 8, 8);   
 }
+
 br{
     color: rgb(255, 255, 255);
 }
@@ -27,6 +28,14 @@ br{
 
 .nivel{
     margin-bottom: 10px;
+}
+
+.container{
+    height: 100%;
+}
+
+.cardContainer{
+    box-sizing: border-box;
 }
 
 .card{
@@ -58,16 +67,20 @@ br{
     width: 100%;
 }
 
+.pokesContainer img{
+    width: 150px;
+}
+
 .body-container{
     width: 50%;
     height: 100%;
-    margin: auto auto 0 auto;
+    margin: auto;
     background-color: rgb(255, 255, 255);
 }
 
-.prueba{
+/* .prueba{
     background-color: rgb(255, 255, 255);
-}
+} */
 
 .opaco{
     filter: grayscale(100%);
@@ -111,9 +124,12 @@ br{
 
 #footer{
     width: 50%;
-    margin: auto;
-    background-color: rgb(255, 255, 255);
+    left: 0;
     bottom: 0;
+    width: 100%;
+    margin: 25% auto auto auto;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
 }
 
 @media screen and (max-width:1040px){
@@ -124,7 +140,7 @@ br{
     
     #footer{
         width: 100%;
-
+        margin-top: 25%;
     }
 
     .tittle{
@@ -134,7 +150,7 @@ br{
     .rulesContainer{
         position: absolute;
         left: 50%;
-        top: 70%;
+        top: 55%;
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         width: 50%;

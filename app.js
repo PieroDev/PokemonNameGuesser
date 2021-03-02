@@ -1,4 +1,3 @@
-var pistaCounter = 0;
 var nivel = 1;
 var pokes = [];
 var nombrePokes = [];
@@ -6,11 +5,12 @@ var pistaCounter2 = 0;
 var pistas = [];
 var generation = 1;
 var vidas = 3;
+var borrarPoke=false;
 
 $(document).ready(function () {
-    pistaCounter = 0;
     pistaCounter2 = 0;
     pistas = [];
+    
     $(".start").on("click", function () {
         mostrarPoke();
     });
@@ -27,6 +27,13 @@ $(document).ready(function () {
     $(".respuesta").on("keypress", function (e) {
         if (e.keyCode === 13) {
             verificarRespuesta();
+            console.log("Se deshabilitó");
+            $(".respuesta").attr("disabled","disabled");
+            setTimeout(function(){
+                
+                console.log("ahora")
+                $(".respuesta").removeAttr("disabled");
+            },2000)
         }
     });
 
@@ -44,7 +51,6 @@ $(document).ready(function () {
 
 function mostrarPoke() {
     $('input').val('');
-    pistaCounter = 0;
     pistaCounter2 = 0;
     pistas = [];
     renderVidas(vidas);
@@ -115,11 +121,13 @@ function mostrarPoke() {
             break;
     }
     
+    console.log("ID: "+id)
     imgUrl = "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png";
     testImage(imgUrl);
     console.log(imgUrl);
     $(".pokeImg").attr("src", "" + imgUrl);
     $(".nivel").html("Pokemon " + nivel);
+
     $.ajax({
             url: "https://pokeapi.co/api/v2/pokemon/" + id + "/",
             method: "GET",
@@ -134,15 +142,20 @@ function mostrarPoke() {
             }
             else{
                 setTimeout(function () {
-                    var pokemonName = pokemon.name;
-                    var pokeSprite = pokemon.sprites.front_default;
-                    pokes.push(pokeSprite);
-                    nombrePokes.push(pokemonName);
-                    console.log(pokemonName);
-                    $(".pokeName").html(pokemonName);
-                    $(".height").html("Height: "+((pokemon.height)/10)+"m");
-                    $(".weight").html("Weight: "+((pokemon.weight)/10)+"kg");
-                    espaciosNombre(pokemonName);
+                    if(borrarPoke===true){
+                        pokes.pop();
+                        borrarPoke=false;
+                    }
+                        var pokemonName = pokemon.name;
+                        var pokeSprite = pokemon.sprites.front_default;
+                        pokes.push(pokeSprite);
+                        nombrePokes.push(pokemonName);
+                        console.log(pokemonName);
+                        $(".pokeName").html(pokemonName);
+                        $(".height").html("Height: "+((pokemon.height)/10)+"m");
+                        $(".weight").html("Weight: "+((pokemon.weight)/10)+"kg");
+                        espaciosNombre(pokemonName);
+                    
                 }, 500)
             }
         })
@@ -231,11 +244,13 @@ function verificarRespuesta() {
             $(".cardContainer").addClass("equivocado");
             $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
             $(".respuestaCorrecta").removeClass("hidden");
+            borrarPoke=true;
+            mostrarPoke();
             setTimeout(function () {
                 $(".cardContainer").removeClass("equivocado");
                 $(".respuestaCorrecta").addClass("hidden");
-            }, 2500)
-            mostrarPoke();
+            }, 2000)
+            
         }
         else{
             renderVidas(vidas);
@@ -249,6 +264,7 @@ function verificarRespuesta() {
             $(".container").addClass("hidden");
             $(".start").removeClass("hidden");
             resetGame();
+            
         }, 2500)
         }
         
@@ -299,6 +315,7 @@ function mostrarReglas(){
 }
 
 function resetGame(){
+  console.log("Se reinicio el juego");
   pistaCounter = 0;
   nivel = 1;
   pokes = [];
@@ -307,4 +324,5 @@ function resetGame(){
   pistas = [];
   generation = 1;
   vidas = 3;
+  actualizarLista();
 }

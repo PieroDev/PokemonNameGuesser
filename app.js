@@ -31,7 +31,6 @@ $(document).ready(function () {
         if (e.keyCode === 13) {
             blockInput();
             verificarRespuesta();
-            
         }
     });
 
@@ -126,7 +125,6 @@ function mostrarPoke() {
         $(".nivel").html("Pokemon " + nivel);
     },2000)
     
-
     $.ajax({
             url: "https://pokeapi.co/api/v2/pokemon/" + id + "/",
             method: "GET",
@@ -210,7 +208,6 @@ function mostrarPista2(){
     }
 }
 
-
 // 1.- Reads the input text from the client and verify if it's correct or not
 // 2.- If it's correct, will add the class of "correcto" to the cardContainer.
 // 3.- If it's incorrect, will do two different things depending of the lifes remaining.
@@ -253,7 +250,6 @@ function verificarRespuesta() {
                 $(".pokeImg").removeClass("semi");
                 $(".pokeImg").addClass("opaco");
             }, 2000)
-            
         }
         else{
             renderVidas(vidas);
@@ -271,7 +267,6 @@ function verificarRespuesta() {
             resetGame();
         }, 2500)
         }
-        
     }
 }
 
@@ -335,7 +330,6 @@ function blockInput(){
          $(".respuesta").removeAttr("disabled");
          $(".pokeBallIcon").prop("disabled", false);
     },2000)
-
 }
 
 function resetGame(){

@@ -76,9 +76,10 @@ br{
 
 .typeIcon{
     width: 30px;
+    margin: 5px 0;
 }
 
-.height, .weight, .card-body p{
+.card-body p{
     margin: 2px;
 }
 
@@ -87,12 +88,7 @@ br{
     height: 100%;
     margin: auto;
     background-color: rgb(255, 255, 255);
-    
 }
-
-/* .prueba{
-    background-color: rgb(255, 255, 255);
-} */
 
 .opaco{
     filter: grayscale(100%);
@@ -102,9 +98,9 @@ br{
     letter-spacing: 1px;
 }
 
-.corazones{
-    width: 25px;
-    margin: 0 5px;
+.substitutes{
+    width: 40px;
+    margin: 0 20px;
 }
 
 .rulesContainer{

@@ -154,8 +154,6 @@ function mostrarPoke() {
                         nombrePokes.push(pokemonName);
                         console.log(pokemonName);
                         $(".pokeName").html(pokemonName);
-                        $(".height").html("Height: "+((pokemon.height)/10)+"m");
-                        $(".weight").html("Weight: "+((pokemon.weight)/10)+"kg");
                         espaciosNombre(pokemonName);
                 }, 500)
             }
@@ -291,10 +289,10 @@ function imageNotFound() {
 
 // Renders the reaining lifes
 function renderVidas(vidas){
-    var corazon = "img/corazon.png";
+    var substitute = "img/substitute.png";
     $(".vidas").html("");
      for(var i=0; i<vidas; i++){
-         $(".vidas").append("<img class="+"corazones"+" src="+corazon+">");
+         $(".vidas").append("<img class="+"substitutes"+" src="+substitute+">");
     }
 }
 

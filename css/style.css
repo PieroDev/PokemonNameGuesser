@@ -1,5 +1,6 @@
 html body{
-    background-color: rgb(218, 8, 8);   
+    background-color: rgb(218, 8, 8);  
+    font-family: 'Inconsolata', monospace;
 }
 
 br{
@@ -17,8 +18,8 @@ br{
     visibility: hidden;
 }
 
-.pokeBallIcon img{
-    width: 30px;
+.pokeBallIcon img, .pokeBallIconRule img{
+    width: 50px;
 }
 
 .pokeImg{
@@ -36,6 +37,8 @@ br{
 
 .cardContainer{
     box-sizing: border-box;
+    margin: 5px auto;
+    padding: 5px 0;
 }
 
 .card{
@@ -71,11 +74,20 @@ br{
     width: 150px;
 }
 
+.typeIcon{
+    width: 30px;
+}
+
+.height, .weight, .card-body p{
+    margin: 2px;
+}
+
 .body-container{
     width: 50%;
     height: 100%;
     margin: auto;
     background-color: rgb(255, 255, 255);
+    
 }
 
 /* .prueba{
@@ -87,7 +99,7 @@ br{
 }
 
 .pokePista2{
-    letter-spacing: 5px;
+    letter-spacing: 1px;
 }
 
 .corazones{
@@ -130,6 +142,7 @@ br{
     margin: 25% auto auto auto;
     text-align: center;
     background-color: rgb(255, 255, 255);
+    font-size: 0.8rem;
 }
 
 @media screen and (max-width:1040px){
@@ -160,6 +173,7 @@ br{
 
     .close{
         visibility: visible;
+        width: 50px;
     }
 
     .pokePista2{

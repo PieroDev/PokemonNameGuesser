@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet"> 
     <script src="app.js"></script>
     <title>Pokemon Name Guesser</title>
 </head>
@@ -34,11 +36,16 @@
                     <div class="card-body">
                         <h2 class="card-title pokeName hidden" style="color: rgb(0, 180, 0);"></h2> 
                         <h5 class="card-tittle pokePista2"></h5>
-                        <p class="card-text">Data:</p>
+                        <p class="card-text data" style="font-size: 1.5rem; "><u>Data</u></p>
+                        <p class="card-text " style="margin: auto;">Type(s):</p>
+                        <div class="row dataTypes justify-content-center" style="width: 50%; margin: auto;">
+                            
+
+                        </div>
                         <p class="card-text height"></p>
                         <p class="card-text weight"></p>
                         <input class="respuesta" type="text" autofocus placeholder="Write the name here">
-                        <a class="btn btn-danger pista">Clue</a>
+                        <a class="btn btn-danger pista " style="font-size: 12px;">Clue</a>
                         <a class="pokeBallIcon btn"><img src="img/pokeball.png" alt=""></a>
                         <p class="noPista hidden" style="color: red;">There's no more clues</p>
                         <a class="btn btn-info mostrarReglas" style="font-size: 10px;">Rules</a>
@@ -58,6 +65,7 @@
                 <br>
                 Special thanks to:
                 <a href="https://pokeapi.co/">PokeApi</a>
+                <p>Types icons by <a href="https://www.deviantart.com/falke2009">falke2009</a></p>
             </div>
         </footer>
     </div>
@@ -65,11 +73,15 @@
         <a class="btn btn-dark close">X</a>
         <h3>Game rules</h3>
         <ul class="reglas">
-            <li><p>You have 3 lifes and 3 clues for each pokemon, you can ask a clue pressing the "clue" button</p></li>
+            <li><p>Every time you fail a guess, you lose 1 life out of 3</p></li>
+            <li><p>You have 3 clues for each pokemon, you can ask a clue pressing the "clue" button</p></li>
             <li><p>Each five pokemon that you guess, you'll advance to the next generation.</p></li>
-            <li><p class="pokeBallIcon">Press ⏎ (Enter) or the <span ><img src="img/pokeball.png"></span> to make your guess</p></li>
+            <li><p class="pokeBallIconRule">Press ⏎ (Enter) or the <span ><img src="img/pokeball.png"></span> to make your guess</p></li>
+            <li><p>Some pokemon has especial characters, like Nidoran-f and Nidoran-m, another examples are Mr-mime and Tapu-Koko </p></li>
+            <li><p>Don't worry about capital letters.</p></li>
+            <li><p>Have fun!</p></li>
         </ul>
-        <img class="psyRules"src="img/psyduck.png" style="width: 150px;">
+        <img class="psyRules"src="img/psyduck.png" title="Psyduck" style="width: 150px;">
     </div>
     
 

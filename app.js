@@ -21,19 +21,15 @@ $(document).ready(function () {
     });
 
     $(".pokeBallIcon").on("click", function () {
+        blockInput();
         verificarRespuesta();
     });
 
     $(".respuesta").on("keypress", function (e) {
         if (e.keyCode === 13) {
+            blockInput();
             verificarRespuesta();
-            console.log("Se deshabilitó");
-            $(".respuesta").attr("disabled","disabled");
-            setTimeout(function(){
-                
-                console.log("ahora")
-                $(".respuesta").removeAttr("disabled");
-            },2000)
+            
         }
     });
 
@@ -55,7 +51,6 @@ function mostrarPoke() {
     pistas = [];
     renderVidas(vidas);
     $(".noPista").addClass("hidden");
-    console.log("Nivel : "+nivel);
     switch (true){
         case (nivel<=5): 
             generation=1;
@@ -120,11 +115,8 @@ function mostrarPoke() {
             var id = Math.floor((Math.random() * 89) + 898);
             break;
     }
-    
-    console.log("ID: "+id)
     imgUrl = "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png";
     testImage(imgUrl);
-    console.log(imgUrl);
     $(".pokeImg").attr("src", "" + imgUrl);
     $(".nivel").html("Pokemon " + nivel);
 
@@ -137,7 +129,6 @@ function mostrarPoke() {
             testImage(imgUrl);
             $(".start").addClass("hidden");
             if(nombrePokes.includes(pokemon.name)){
-                console.log("Este pokemon ya salió");
                 mostrarPoke();
             }
             else{
@@ -148,6 +139,13 @@ function mostrarPoke() {
                     }
                         var pokemonName = pokemon.name;
                         var pokeSprite = pokemon.sprites.front_default;
+                        var pokeTypes = pokemon.types;
+                        var dataTipos = [];
+                        for(var i=0; i<pokeTypes.length; i++){
+                            var tipo = pokeTypes[i].type.name;
+                            dataTipos.push(tipo);
+                        } 
+                        renderTipos(dataTipos);
                         pokes.push(pokeSprite);
                         nombrePokes.push(pokemonName);
                         console.log(pokemonName);
@@ -186,23 +184,15 @@ function mostrarPista2(){
         if(pistaCounter2===1){
             espacioCreado.pop();
         }
-        console.log("La pista es: "+pista);
         if(pistas.includes(pista)){
-            console.log("Si esta en el array");
             pistaCounter2--;
             mostrarPista2();
             espacioCreado.push();
         }
         else{
-            console.log("Se añadio "+pista+" al array.");
             pistas.push(pista);
-            console.log(pistas);
             var indexPista = nombreSeparado.indexOf(pista);
             espacioCreado[indexPista] = pista;
-            console.log(nombreSeparado);
-            console.log(indexPista);
-            console.log(espacioCreado);
-            console.log(espacioCreado.length)
             if(espacioCreado.length>=8 ){
                 $(".pokePista2").css("letter-spacing", "3px")
             }
@@ -221,7 +211,7 @@ function mostrarPista2(){
 function verificarRespuesta() {
     var nombre = $(".pokeName").html();
     var respuesta = $(".respuesta").val().toLowerCase();
-    console.log("El nombre es: " + nombre + " y la respuesta es: " + respuesta);
+    console.log("El nombre es: " + nombre + " y la respuesta fue: " + respuesta);
     if (nombre === respuesta) {
         $(".tusRespuestas").removeClass("hidden");
         nivel++;
@@ -239,7 +229,6 @@ function verificarRespuesta() {
     } else {
         vidas--;
         if(vidas>0){
-            console.log("Vidas restantes: "+vidas)
             renderVidas(vidas);
             $(".cardContainer").addClass("equivocado");
             $(".respuestaCorrecta").html("The correct answer was: " + nombre.toUpperCase());
@@ -306,12 +295,27 @@ function renderVidas(vidas){
 }
 
 function cerrarReglas(){
-    console.log("se deberia cerrar");
     $(".rulesContainer").css("display", "none");
 }
 
 function mostrarReglas(){
     $(".rulesContainer").css("display", "block");
+}
+
+function renderTipos(tipos){
+    console.log("Estos son los tipos que llegan a la funcion:"+tipos);
+    $(".dataTypes").html("");
+    tipos.forEach(tipo => {
+        $(".dataTypes").append("<div class=" + "col" + "><img src= img/types/" + tipo + ".png class="+"typeIcon"+"></div>")
+        $(".typeIcon").attr("title", ""+tipo+"");
+    });
+}
+
+function blockInput(){
+    $(".respuesta").attr("disabled","disabled");
+            setTimeout(function(){
+                $(".respuesta").removeAttr("disabled");
+            },2000)
 }
 
 function resetGame(){

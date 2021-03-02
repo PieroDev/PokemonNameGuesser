@@ -1,3 +1,4 @@
+// Variables that will be used by different functions.
 var nivel = 1;
 var pokes = [];
 var nombrePokes = [];
@@ -7,6 +8,7 @@ var generation = 1;
 var vidas = 3;
 var borrarPoke=false;
 
+//Event listeners
 $(document).ready(function () {
     pistaCounter2 = 0;
     pistas = [];
@@ -39,12 +41,13 @@ $(document).ready(function () {
 
     $(".mostrarReglas").on("click", function () {
         mostrarReglas();
-    });
-
-    
+    }); 
 })
 
-
+// 1.- Change the generation according to the level.
+// 2.- Change the number of the id according to the generation.
+// 3.- Gets a pokemon info from the pokeAPI using the ID.
+// 4.- Renders the info to the page with jquery.
 function mostrarPoke() {
     $('input').val('');
     pistaCounter2 = 0;
@@ -133,6 +136,7 @@ function mostrarPoke() {
             }
             else{
                 setTimeout(function () {
+                    // if borrarPoke is true, deletes the las pokemon from the array.
                     if(borrarPoke===true){
                         pokes.pop();
                         borrarPoke=false;
@@ -153,7 +157,6 @@ function mostrarPoke() {
                         $(".height").html("Height: "+((pokemon.height)/10)+"m");
                         $(".weight").html("Weight: "+((pokemon.weight)/10)+"kg");
                         espaciosNombre(pokemonName);
-                    
                 }, 500)
             }
         })
@@ -162,7 +165,7 @@ function mostrarPoke() {
             $(".respuesta").focus();
         }, 500))
 }
-
+// Render in the page the spaces for the clues
 function espaciosNombre(nombre) {
     var largoNombre = nombre.length;
     var pista2 = "_ ".repeat(largoNombre);
@@ -171,7 +174,7 @@ function espaciosNombre(nombre) {
 
 
 
-
+// Renders a clue randomized, if a clue is repeated, the function will be triggered again.
 function mostrarPista2(){
     pistaCounter2++;
     if(pistaCounter2<4){
@@ -199,7 +202,6 @@ function mostrarPista2(){
             pistaCreada = espacioCreado.join(" ");
             $(".pokePista2").html(pistaCreada.toUpperCase());
         }
-        
     }
     else{
         $(".noPista").removeClass("hidden");
@@ -207,7 +209,11 @@ function mostrarPista2(){
 }
 
 
-
+// 1.- Reads the input text from the client and verify if it's correct or not
+// 2.- If it's correct, will add the class of "correcto" to the cardContainer.
+// 3.- If it's incorrect, will do two different things depending of the lifes remaining.
+// 4.- If life > 0 will discount a life and trigger again the function mostrarPoke() 
+// 5.- If life = 0 will reset the game (Game Over).
 function verificarRespuesta() {
     var nombre = $(".pokeName").html();
     var respuesta = $(".respuesta").val().toLowerCase();
@@ -260,6 +266,7 @@ function verificarRespuesta() {
     }
 }
 
+// Actualize the list of correct answers using the sprites of the pokemon
 function actualizarLista() {
     $(".pokesContainer").html("");
     pokes.forEach(sprite => {
@@ -267,41 +274,39 @@ function actualizarLista() {
     });
 }
 
-
+// Test if the image of the pokemon is loaded or not, if not, will trigger mostrarPoke() again
 function testImage(imgUrl) {
     var tester = new Image();
     tester.addEventListener('load', imageFound);
     tester.addEventListener('error', imageNotFound);
     tester.src = imgUrl;
 }
-
 function imageFound() {
     console.log('That image is found and loaded');
 }
-
 function imageNotFound() {
     console.log('That image was not found.');
     mostrarPoke();
 }
 
+// Renders the reaining lifes
 function renderVidas(vidas){
     var corazon = "img/corazon.png";
     $(".vidas").html("");
      for(var i=0; i<vidas; i++){
          $(".vidas").append("<img class="+"corazones"+" src="+corazon+">");
     }
-    
-    
 }
 
+// cerrarReglas() closes the rules lightbox, mostrarReglas() opens the rules lightbox
 function cerrarReglas(){
     $(".rulesContainer").css("display", "none");
 }
-
 function mostrarReglas(){
     $(".rulesContainer").css("display", "block");
 }
 
+// Renders the pokemon types
 function renderTipos(tipos){
     console.log("Estos son los tipos que llegan a la funcion:"+tipos);
     $(".dataTypes").html("");
@@ -310,12 +315,15 @@ function renderTipos(tipos){
         $(".typeIcon").attr("title", ""+tipo+"");
     });
 }
-
+// This is triggered by 2 listeners, when "enter key" is pressed and pokeBallIcon is pressed
 function blockInput(){
     $(".respuesta").attr("disabled","disabled");
-            setTimeout(function(){
-                $(".respuesta").removeAttr("disabled");
-            },2000)
+    $(".pokeBallIcon").prop("disabled", true);
+    setTimeout(function(){
+         $(".respuesta").removeAttr("disabled");
+         $(".pokeBallIcon").prop("disabled", false);
+    },2000)
+
 }
 
 function resetGame(){
